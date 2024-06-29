@@ -1,0 +1,38 @@
+What is mavan
+
+It is use to manage dependancies.
+and use to build application.
+Build automation tool.
+
+use case
+
+many jar files created and apploaded on the mvn repository on web 
+for using this repository there are 2 way 
+without maven : You need to manul download of the jar file and include in the project
+with maven : you just need to give dependancy info from mvn web
+ repository and copy and paste in pom.xml all file automatically downloaded and configure.
+
+
+dependancies code contain following feilds
+1. groupid : refer to company name
+2.artifactid : refer to jar file 
+3 version : refer to jar file version
+
+maven provoid build life cycle 
+it is use for following things
+clean
+validate
+compile
+test
+test-compile
+package
+verify
+install
+site
+deploy
+
+vs code provoid differnt way to pakage and deploy project
+if you  are deploying via maven then you have to package in jar 
+if you have to automate process then you can us pom to and all things will automate 
+
+

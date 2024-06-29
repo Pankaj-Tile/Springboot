@@ -1,0 +1,3 @@
+Uses bin system  once object is initialize in any class it can be use in any other class ..
+		 for this when we require that object we not require to initilize it again ..
+		 java go to context manager and ask for the perticuler bin..
