@@ -1,0 +1,12 @@
+bean - is similer as object but refer as classes /components in ioc container
+
+if @Componet is return above and class abstarct class function or feild then it take that entity in ioc container
+@ refers some information about class abstarct class function or feild about some context according to annotation
+
+main method is entry point of spring boot application and we use @SpringBootApplication is notation use on that class and its only one time use in whole project
+@SpringBootApplication do 3 works or combine 3 notations
+1. @Configure: Add configuration of annotations 2.use with class 3.and also with @Bean anotations but @Bean is use for functions
+2 @EnableAutoConfiguration: it enable auto configuration to mongo sql or stuff like that
+3 @ComponentScan :Ioc container /application context searching /scanning to scan beans
+
+controller : special type of tamplet that is use for handling request
