@@ -1,0 +1,15 @@
+maven Springboot repository is differnt and maven reposity is different
+
+to connect mongo we have ensure that mongodb is on in our system
+we have to provide corresponding dependncies in pom.xml
+in src/resouce/application resource define mongodb host port and if require user and password
+
+pakages
+controller
+services
+repository: interfaces
+
+controller call services
+services call interfaces
+
+Optional is in java package an d tells that there might be data or not
