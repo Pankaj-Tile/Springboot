@@ -1,0 +1,37 @@
+Spring boot jsp views how to create
+
+
+first for creating html jsp pages create 
+
+webapp folder in src/main folder
+to store view / jsp pages create views folder inside webapp
+and 
+to give location of created pages to spring boot app go to application.properties file inside resources and add below things
+
+spring.mvc.view.prefix=/view/
+spring.mvc.view.suffix=.jsp
+
+
+to run .jsp files its  require that our embedded tomcat server  should have jasper dependancies so go to mvn spring repostitory and add following dependency in pom.xml
+if you do not download jasper then page will download and not open
+<dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-jasper</artifactId>
+    <version>11.0.0-M18</version>
+</dependency>
+what for the ide to save changes
+
+also you can create controller package to map pages with path
+
+application.properties file features 
+ // you can use internet to find properties
+Its configuration file
+key value pair data
+springboot uses key to configure data 
+you can costomize thing using changing values
+
+Spring boot also provoid application.ybl file
+
+Jpa java persistence api its orm its a mediatior
+its require to add dependancy to use jpa in program
+
