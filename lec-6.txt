@@ -1,0 +1,17 @@
+need to add this
+for jpa crud operation;
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQLDialect
+spring.jpa.hibernate.ddl-auto= update
+
+
+create interface in repositry pakage which extends CrudReposistory<entity,entity.type>
+
+create fuctions like 
+ public List<User> findByName(String name);
+    public List<User> findByNameAndCity(String name,String city);
+    //findBy LessThan/EqualTo.. 
+
+or you can use anotations
+@Query 
+ --JPQL query java persistant query language
+ -- native query
