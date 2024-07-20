@@ -1,0 +1,7 @@
+Connecting our bookapp web app with the database which we have created in lec-7
+
+now we have to add spring data jpa dependency in project
+
+there are two way 
+first in vs code go to pom.xml file write click on code select add starter and add dependency spring data jpa
+second is to go on web browser go to mavan starter website search for spring boot jpa dependency copy code and paste in vs code
