@@ -1,0 +1,318 @@
+lec 37 overview
+lec 38 setup project object model pom full form
+if starter jpa is in project and not implemented then cause error
+
+lec39 Database setup er diagram
+localhost ip address is 172.0.0.1
+if any dependency is missing try run mvn dependency:tree comand in terminal
+
+drow.io for website for the er diagram creation
+
+lec 40 run project with no error or resolving erros and creating entity with mapping and controller lec 15 practical v1
+
+lec 41 templete setup inherit base templete
+we created controller for home page using getmapping
+then we created home.html and declare it as a fragment<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+<body>
+    <section >
+    <h1> This is Home Page</h1>
+    </section>
+</body>
+</html>
+
+then we included that section in the base templete
+<!doctype html>
+<html lang="en"  xmlns:th="https://www.thymeleaf.org" th:fragment="Layout(content)" >
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
+
+    <title>base templete</title>
+  </head>
+  <body>
+    <h1>Base</h1>
+    <div th:replace="${content}"></div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+
+also created about controller html page like about
+code <!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <section >
+    <h1> This is about page</h1>
+    </section>
+</body>
+</html>
+
+this is because we create a templete in base include all css and js on that page and retrive other pages content on that pages as needed
+
+
+lec 42
+
+creating banners or theme for the website  project1 v3
+
+lec 43
+
+creating signup forms usign bootstrap and thymeleaf project v4
+lec 44 
+adding database connetion to form
+also displaying message of submission error using thymeleaf and adding session for that
+
+lec 45 project v5
+clean css use
+validation using @valid similart to lec 13
+and implemented using bootstrap
+
+
+lec 46 project v6
+
+login system with spring security
+it can protect url like /user/**
+
+package com.smartcontact.project1.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+    @RequestMapping("/index")
+    public String home(){
+        return "normal/userHome";
+    }
+    
+}
+this is controller and if is user then only can acess userHome which is in normal folder
+
+include springboot starter security for maven
+
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+    <version>3.1.5</version>
+</dependency>
+
+it add authentication on its own on pages for logout need fire /logout on url
+on next lec we see how specity the authentication on some page with password that we taken from out signup
+
+lec 47  project v7 3steps
+
+package com.smartcontact.project1.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.smartcontact.project1.entity.User;
+
+public interface UserRepository extends JpaRepository<User,Integer> {
+    @Query("select u from User u where u.email=:email")
+    public User getUserByUserName(@Param("email") String email);
+
+}
+
+
+step1
+provoid UserDetails implementation class
+
+package com.smartcontact.project1.config;
+
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.*;
+import com.smartcontact.project1.entity.User;
+
+public class CustomUserDetails implements UserDetails{
+    private User user;
+    
+    public CustomUserDetails(User user) {
+        this.user = user;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+       
+        SimpleGrantedAuthority simpleGrantedAuthority=new SimpleGrantedAuthority(user.getRole());
+        return List.of(simpleGrantedAuthority);
+    }
+
+    @Override
+    public String getPassword() {
+     
+        return user.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        // TODO Auto-generated method stub
+        return user.getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+    
+}
+
+step2
+
+provide UserDetailsService Implementation class
+
+package com.smartcontact.project1.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.smartcontact.project1.dao.UserRepository;
+import com.smartcontact.project1.entity.User;
+
+public class UserDetailsServiceImpl implements UserDetailsService {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user=userRepository.getUserByUserName(username);
+        if(user==null){
+            throw new UsernameNotFoundException("username not found");
+        }
+        CustomUserDetails customUserDetails=new CustomUserDetails(user);
+
+        return customUserDetails;
+    }
+    
+}
+
+the userRepository give user by userName to UserDetailsService and it gives user to UserDetails
+ok clear
+
+
+
+provide 48 project v7
+step 3
+package com.smartcontact.project1.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+@Configuration
+@EnableWebSecurity
+public class config {
+    @Bean
+    public UserDetailsService getUserDetailService(){
+        return new UserDetailsServiceImpl();
+    }
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+    @Bean 
+    public DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(this.getUserDetailService());
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+       
+        return daoAuthenticationProvider;
+    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+        httpSecurity.authorizeHttpRequests(authorize->
+        {
+            // authorize.requestMatchers("/","/about").permitAll();
+            authorize.requestMatchers("/user/**").authenticated();
+            authorize.anyRequest().permitAll();
+    });
+    httpSecurity.formLogin(Customizer.withDefaults());
+        return httpSecurity.build();
+    }
+
+}
+
+use password encoder and use database for validation and
+
+
+lec 49
+
+project v8
+
+creating costomized sign in page for application
+
+configring in congig file and adding styling in sign in page or login page
+
+lec 50
+project v9
+adding success and failure page url to singin form
+
+lec 51 
+project v9
+getting value or feilds from database to user dashboard
+
+
+
+
+
