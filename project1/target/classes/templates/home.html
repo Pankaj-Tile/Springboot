@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <section class="banner d-flex justify-content-center aline-items-center " style="color: antiquewhite;" >
+    <div class="text-center">
+        <h1 class="font-weight-bold">Smart contact manager</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati sint non minus officiis veniam totam nihil illo, laudantium, neque vel aperiam molestiae error dolorum quaerat ullam ipsum dignissimos quos porro.</p>
+        <a  th:href="@{/signup}"><button class="btn bg-primary text-wight">Get started</button></a>
+    </div>
+   
+    </section> 
+</body>
+</html>

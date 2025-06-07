@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(0, 0, 0);
+}
+.bg-primary{
+    background-color: #009688 !important;
+}
+.banner{
+    width: 100%; 
+    /* to set width */
+    height: 100%;
+    /* to set hight */
+    background:linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)) ,url(../img/lin2.png);
+    /* to mixup to colors in backgroud */
+    background-size: cover;
+    /* to cover full background */
+    background-color: aliceblue;
+}
+.mycard{
+    padding: 20px;
+    background-color: aliceblue;
+}
