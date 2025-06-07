@@ -1,0 +1,4 @@
+jsonmangereferance
+jsonbackrefrence
+
+ @OneToOne(mappedBy = "foreinkeyname")
