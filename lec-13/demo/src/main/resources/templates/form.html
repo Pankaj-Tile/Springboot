@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmln:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-5 offset-md-3"></div>
+            <form th:action="@{/action}" method="post" th:object="${LoginData}">
+              <h1> sign up here</h1>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">name</label>
+                  <input type="text" name="username" class="form-control" th:value="${LoginData.username}" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  > 
+                  <!-- th:classappend="${fields.hasErrors() ? 'is-invalid':''} -->
+                  <div th:each="e: ${#fields.errors('username')}" th:text="${e}" class="invalid-feedback"></div>
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Email</label>
+                  <input type="email" name="email" th:value="${LoginData.email}" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" name="agreed" class="form-check-input" id="exampleCheck1">
+                  <div th:each="e: ${#fields.errors('agreed')}" th:text="${e}" class="invalid-feedback"></div>
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+    </div>
+</body>
+</html>

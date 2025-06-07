@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about</title>
+</head>
+<body>
+    <h1>This is about page</h1>
+    <h2>Develper :: <h2 th:text="${name}" ></h2> <br> <h2 th:text="${date}" ></h2> <h2 th:text="${name}" ></h2></h2>
+    <div th:with="a=5,b=3, n=${name}"> 
+        <!-- to create and display local variables -->
+        <h2 th:text="'name is'+${n}" ></h2>
+        <h2 th:text="'a is'+${a}" ></h2>
+        <h2 th:text="'sum'+${a+b}" ></h2>
+    </div>
+</body>
+</html>

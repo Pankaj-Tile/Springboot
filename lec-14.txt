@@ -1,0 +1,5 @@
+adding css img and js
+for css include this line      <link rel="stylesheet" th:href="@{/css/my.css}">
+
+for js <script th:src="@{/js/filename.js}"></script>
+for img    <img th:src="@{/img/letter.jpeg}" alt="">

@@ -1,0 +1,18 @@
+lec 35 
+form validation using spring mvc 
+in entity give anotations like @email etc that is present in validation depedancy that we included
+in controller pass @ valid anotation eg
+ public String process(@Valid @ModelAttribute("LoginData") LoginData loginData, BindingResult result){
+        if(result.hasErrors()){
+            System.out.println(result);
+            return "form";
+           }
+       System.out.println(loginData);
+     
+        return "success";
+    }
+
+use thymeleaf to display errors like 
+
+  <input type="checkbox" name="agreed" class="form-check-input" id="exampleCheck1">
+                  <div th:each="e: ${#fields.errors('agreed')}" th:text="${e}" class="invalid-feedback"></div>
